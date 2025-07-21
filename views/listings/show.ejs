@@ -1,0 +1,23 @@
+<%- include('../partials/head') %>
+
+<div class="container mt-4" style="max-width: 700px;">
+  <h2 class="text-center mb-3"><%= foundListing.title %></h2>
+
+  <img src="<%= foundListing.image %>" class="img-fluid rounded mb-3" alt="Image of <%= foundListing.title %>">
+
+  <p class="lead"><%= foundListing.description %></p>
+  <p><strong>Price:</strong> <%= foundListing.price %> BHD</p>
+  <p><strong>Seller:</strong> <%= foundListing.seller.username %></p>
+
+  <a href="/listings" class="btn btn-secondary mt-3">Back to Listings</a>
+</div>
+
+<!-- Add  Delete Form to the Show Page -->
+ <% if (foundListing.seller._id.equals(user._id)) { %>
+  <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="POST">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+<% } %>
+
+</body>
+</html>
