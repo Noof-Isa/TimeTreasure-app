@@ -1,0 +1,21 @@
+body {
+  background-color: red;
+}
+body {
+  background-color: cornsilk;
+  text-align: center;
+}
+
+.listing-img {
+  width: 50vw;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+li {
+  list-style: none;
+  text-align: center;
+}
