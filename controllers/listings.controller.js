@@ -34,4 +34,5 @@ router.get('/', async (req, res) => {
     res.send('Something went wrong')
   }
 })
+
 module.exports = router
