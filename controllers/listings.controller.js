@@ -24,7 +24,7 @@ router.post('/', isSignedIn, async (req, res) => {
   }
 })
 
-// VIEW ALL LISTINGS
+// VIEW ALL LISTINGS 
 router.get('/', async (req, res) => {
   try {
     const foundListings = await Listing.find()
@@ -38,7 +38,9 @@ router.get('/', async (req, res) => {
 // VIEW A SINGLE LISTING
 router.get('/:listingId', async (req, res) => {
   try {
-    const foundListing = await Listing.findById(req.params.listingId).populate('seller')
+    const foundListing = await Listing.findById(req.params.listingId)
+  .populate('seller')
+  .populate('comments.author')
     res.render('listings/show.ejs', { foundListing })
   } catch (error) {
     console.log(error)
@@ -80,4 +82,27 @@ router.put('/:listingId', isSignedIn, async (req, res) => {
 
   return res.send('Not authorized')
 })
+
+// POST COMMENT FORM TO THE DATABASE
+router.post('/:listingId/comments', isSignedIn, async (req, res) => {
+  const foundListing = await Listing.findById(req.params.listingId)
+  req.body.author = req.session.user._id
+  foundListing.comments.push(req.body)
+  await foundListing.save()
+  res.redirect(`/listings/${req.params.listingId}`)
+})
+
+router.put('/:listingId/comments/:commentId', isSignedIn, async (req, res) => {
+  const foundListing = await Listing.findById(req.params.listingId)
+  const comment = foundListing.comments.id(req.params.commentId)
+
+  if (comment.author.equals(req.session.user._id)) {
+    comment.content = req.body.content
+    await foundListing.save()
+    res.redirect(`/listings/${req.params.listingId}`)
+  } else {
+    res.send('Not authorized')
+  }
+})
+
 module.exports = router

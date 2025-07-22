@@ -21,5 +21,24 @@
 
 <!-- edit button  -->
  <a href="/listings/<%= foundListing._id %>/edit" class="btn btn-warning">Edit</a>
+
+ <!-- comment form  -->
+ <h3 class="text-center">Leave a Comment</h3>
+<form action="/listings/<%= foundListing._id %>/comments" method="POST" class="mb-4">
+  <div class="mb-3">
+    <textarea name="content" class="form-control" rows="3" required></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Post Comment</button>
+  <!-- display the comments -->
+   <h3 class="text-center">Comments</h3>
+<ul class="list-group">
+  <% foundListing.comments.forEach((comment) => { %>
+    <li class="list-group-item">
+      <%= comment.content %> — <em><%= comment.author.username %></em>
+    </li>
+  <% }) %>
+</ul>
+
+</form>
 </body>
 </html>
