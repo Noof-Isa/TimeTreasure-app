@@ -68,4 +68,16 @@ router.get('/:listingId/edit', isSignedIn, async (req, res) => {
 
   return res.send('Not authorized')
 })
+
+// HANDLE EDIT FORM SUBMISSION
+router.put('/:listingId', isSignedIn, async (req, res) => {
+  const foundListing = await Listing.findById(req.params.listingId).populate('seller')
+
+  if (foundListing.seller._id.equals(req.session.user._id)) {
+    await Listing.findByIdAndUpdate(req.params.listingId, req.body, { new: true })
+    return res.redirect(`/listings/${req.params.listingId}`)
+  }
+
+  return res.send('Not authorized')
+})
 module.exports = router
