@@ -55,15 +55,23 @@ router.get('/:listingId', async (req, res) => {
 })
 
 // DELETE LISTING FROM DATABASE
+const cloudinary = require('../config/cloudinary')
+
 router.delete('/:listingId', isSignedIn, async (req, res) => {
+  try{
   const foundListing = await Listing.findById(req.params.listingId).populate('seller')
 
-  if (foundListing.seller._id.equals(req.session.user._id)) {
+  if (foundListing.seller._id.equals(req.session.user._id)) return res.send('Not authorized') 
+    if (foundListing.image?.cloudinary_id) {
+      await cloudinary.uploader.destroy(foundListing.image.cloudinary_id)
+    }
     await foundListing.deleteOne()
-    return res.redirect('/listings')
+    res.redirect('/listings')  
+  } //closing try 
+  catch (err) {
+    console.error(err)
+    res.send('Error deleting listing')
   }
-
-  return res.send('Not authorized')
 })
 
 // RENDER THE EDIT FORM VIEW
