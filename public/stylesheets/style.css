@@ -249,3 +249,15 @@ textarea.form-control {
   border-color: #c2a97f;
   font-family: 'EB Garamond', serif;
 }
+
+.listing-link {
+  text-decoration: none;
+  color: #4b2e05;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.25rem;
+}
+
+.listing-link:hover {
+  color: #a36a28;
+  text-decoration: underline;
+}
