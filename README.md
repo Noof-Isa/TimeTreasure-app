@@ -41,7 +41,7 @@ The app was created to practice core full-stack web development skills and simul
 
 - [MDN Web Docs](https://developer.mozilla.org/)
 - [Bootstrap](https://getbootstrap.com/)
-- [pinterest](hhttps://www.pinterest.com/pin/986710599618115723/)
+- [pinterest](https://www.pinterest.com/pin/986710599618115723/)
 
 ## 🚧 Next Steps
 
