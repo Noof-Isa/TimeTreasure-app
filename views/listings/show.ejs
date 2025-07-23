@@ -1,47 +1,54 @@
 <%- include('../partials/head') %>
 
-<div class="container mt-4" style="max-width: 700px;">
-  <h2 class="text-center mb-3"><%= foundListing.title %></h2>
+  <div class="container mt-4" style="max-width: 700px;">
+    <h2 class="text-center mb-3">
+      <%= foundListing.title %>
+    </h2>
 
-  <img src="<%= foundListing.image %>" class="img-fluid rounded mb-3" alt="Image of <%= foundListing.title %>">
+    <img src="<%= foundListing.image %>" class="img-fluid rounded mb-3" alt="Image of <%= foundListing.title %>">
 
-  <p class="lead"><%= foundListing.description %></p>
-  <p><strong>Price:</strong> <%= foundListing.price %> BHD</p>
-  <p><strong>Seller:</strong> <%= foundListing.seller.username %></p>
+    <p class="lead">
+      <%= foundListing.description %>
+    </p>
+    <p><strong>Price:</strong>
+      <%= foundListing.price %> BHD
+    </p>
+    <p><strong>Seller:</strong>
+      <%= foundListing.seller.username %>
+    </p>
 
-  <a href="/listings" class="btn btn-secondary mt-3">Back to Listings</a>
-</div>
-
-<!-- Add  Delete Form to the Show Page -->
- <% if (foundListing.seller._id.equals(user._id)) { %>
-  <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="POST">
-    <button type="submit" class="btn btn-danger">Delete</button>
-    <!-- edit button  -->
-
-    <a href="/listings/<%= foundListing._id %>/edit" class="btn btn-warning">Edit</a> 
-  </form>
-<% } %>
-
- 
-
-  <!-- comment form  -->
- <h3 class="text-center">Leave a Comment</h3>
-<form action="/listings/<%= foundListing._id %>/comments" method="POST" class="mb-4">
-  <div class="mb-3">
-    <textarea name="content" class="form-control" rows="3" required></textarea>
+    <a href="/listings" class="btn btn-secondary mt-3">Back to Listings</a>
   </div>
-  <button type="submit" class="btn btn-primary">Post Comment</button>
-  <!-- display the comments -->
-   <h3 class="text-center">Comments</h3>
-<ul class="list-group">
-  <% foundListing.comments.forEach((comment) => { %>
-    <li class="list-group-item">
-      <%= comment.content %> — <em><%= comment.author.username %></em>
-    </li>
-  <% }) %>
-</ul>
 
+  <!-- Add  Delete Form to the Show Page -->
+  <% if (foundListing.seller._id.equals(user._id)) { %>
+    <form action="/listings/<%= foundListing._id %>?_method=DELETE" method="POST">
+      <button type="submit" class="btn btn-danger">Delete</button>
+      <!-- edit button  -->
 
-</form>
-</body>
-</html>
+      <a href="/listings/<%= foundListing._id %>/edit" class="btn btn-warning">Edit</a>
+    </form>
+    <% } %>
+
+      <!-- comment form  -->
+      <h3 class="text-center">Leave a Comment</h3>
+      <form action="/listings/<%= foundListing._id %>/comments" method="POST" class="mb-4">
+        <div class="mb-3">
+          <textarea name="content" class="form-control" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Post Comment</button>
+        <!-- display the comments -->
+        <h3 class="text-center">Comments</h3>
+        <ul class="list-group">
+          <% foundListing.comments.forEach((comment)=> { %>
+            <li class="list-group-item">
+              <%= comment.content %> — <em>
+                  <%= comment.author.username %>
+                </em>
+            </li>
+            <% }) %>
+        </ul>
+      </form>
+      </body>
+
+      </html>

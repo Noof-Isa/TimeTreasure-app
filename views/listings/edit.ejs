@@ -1,32 +1,35 @@
 <%- include('../partials/head') %>
 
-<div class="container mt-4" style="max-width: 600px;">
-  <h1 class="text-center mb-4">Edit <%= foundListing.title %></h1>
+  <div class="container mt-4" style="max-width: 600px;">
+    <h1 class="text-center mb-4">Edit <%= foundListing.title %>
+    </h1>
 
-  <form action="/listings/<%= foundListing._id %>?_method=PUT" method="POST">
-    <div class="mb-3">
-      <label for="title" class="form-label">Title</label>
-      <input type="text" name="title" id="title" value="<%= foundListing.title %>" class="form-control" required />
-    </div>
+    <form action="/listings/<%= foundListing._id %>?_method=PUT" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" value="<%= foundListing.title %>" class="form-control" required />
+      </div>
 
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea name="description" id="description" class="form-control" rows="3" required><%= foundListing.description %></textarea>
-    </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control" rows="3"
+          required><%= foundListing.description %></textarea>
+      </div>
 
-    <div class="mb-3">
-      <label for="price" class="form-label">Price (BHD)</label>
-      <input type="number" name="price" id="price" value="<%= foundListing.price %>" class="form-control" required />
-    </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price (BHD)</label>
+        <input type="number" name="price" id="price" value="<%= foundListing.price %>" class="form-control" required />
+      </div>
 
-    <div class="mb-3">
-      <label for="image" class="form-label">Image URL</label>
-      <input type="text" name="image" id="image" value="<%= foundListing.image %>" class="form-control" />
-    </div>
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="text" name="image" id="image" value="<%= foundListing.image %>" class="form-control" />
+      </div>
 
-    <button type="submit" class="btn btn-warning w-100">Update Listing</button>
-  </form>
-</div>
+      <button type="submit" class="btn btn-warning w-100">Update Listing</button>
+    </form>
+  </div>
 
-</body>
-</html>
+  </body>
+
+  </html>

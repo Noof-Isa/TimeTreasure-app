@@ -1,40 +1,36 @@
-
 <%- include('./partials/head') %>
-
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=EB+Garamond&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=EB+Garamond&display=swap" rel="stylesheet">
 
   <!--  custom stylesheet -->
   <link rel="stylesheet" href="/stylesheets/style.css" />
 
-</head>
-<body>
-  <div class="page-container">
-    <div class="left-side"></div>
+  </head>
 
-    <div class="right-side">
-      <% if (user) { %>
-        <h1>Welcome to the app, <%= user.username %>!</h1>  
-              <p class="custom-font-text">
-          your journey through timeless finds begins here.
-</p>
-       
-       
+  <body>
+    <div class="page-container">
+      <div class="left-side"></div>
 
+      <div class="right-side">
+        <% if (user) { %>
+          <h1>Welcome to the app, <%= user.username %>!</h1>
+          <p class="custom-font-text">
+            your journey through timeless finds begins here.
+          </p>
 
-      <% } else { %>
-        <h1>Welcome to the TimeTreasure-app , guest.</h1>
-        <p class="custom-font-text">
-          Sign up to unlock all the features and start adding listings today!
-</p>
-        <a href="/auth/sign-up" class="vintage-button">Sign up</a>
-        <a href="/auth/sign-in" class="vintage-button">Sign in</a>
-        
-      <% } %>
+          <% } else { %>
+            <h1>Welcome to the TimeTreasure-app , guest.</h1>
+            <p class="custom-font-text">
+              Sign up to unlock all the features and start adding listings today!
+            </p>
+            <a href="/auth/sign-up" class="vintage-button">Sign up</a>
+            <a href="/auth/sign-in" class="vintage-button">Sign in</a>
+
+            <% } %>
+      </div>
     </div>
-  </div>
-</body>
-</html>
+  </body>
 
+  </html>

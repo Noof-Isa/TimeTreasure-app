@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const isSignedIn = require('../middleware/is-signed-in')
 const Listing = require('../models/listing')
-const upload = require('../config/multer')
 
 // NEW LISTING FORM
 router.get('/new', isSignedIn, (req, res) => {
@@ -16,7 +15,6 @@ router.post('/', isSignedIn, async (req, res) => {
     await Listing.create(req.body)
     res.redirect('/listings')
   } catch (error) {
-    console.log(error)
     res.send('Something went wrong')
   }
 })
@@ -26,7 +24,6 @@ router.get('/my', isSignedIn, async (req, res) => {
     const myListings = await Listing.find({ seller: req.session.user._id })
     res.render('listings/myListings.ejs', { listings: myListings })
   } catch (error) {
-    console.log(error)
     res.redirect('/listings')
   }
 })
@@ -36,7 +33,6 @@ router.get('/', async (req, res) => {
     const foundListings = await Listing.find()
     res.render('listings/index.ejs', { foundListings: foundListings })
   } catch (err) {
-    console.log(err)
     res.send('Something went wrong')
   }
 })
@@ -44,13 +40,12 @@ router.get('/', async (req, res) => {
 // VIEW A SINGLE LISTING
 router.get('/:listingId', async (req, res) => {
   try {
-     const foundListing = await Listing.findById(req.params.listingId)
-  .populate('seller')
-  .populate('comments.author')
+    const foundListing = await Listing.findById(req.params.listingId)
+      .populate('seller')
+      .populate('comments.author')
 
     res.render('listings/show.ejs', { foundListing })
   } catch (error) {
-    console.log(error)
     res.redirect('/listings')
   }
 })

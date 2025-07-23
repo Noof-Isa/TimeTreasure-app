@@ -3,9 +3,9 @@ const Schema = mongoose.Schema
 
 const commentSchema = new mongoose.Schema({
   content: String,
-  author: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User' 
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   }
 }, { timestamps: true })
 
@@ -18,9 +18,9 @@ const listingSchema = new Schema({
   seller: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  
-}, 
-comments: [commentSchema]
+
+  },
+  comments: [commentSchema]
 }, { timestamps: true })
 
 
