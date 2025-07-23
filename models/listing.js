@@ -13,7 +13,8 @@ const listingSchema = new Schema({
   title: String,
   description: String,
   price: Number,
-   image: String,
+  image: String,
+
   seller: {
     type: Schema.Types.ObjectId,
     ref: 'User'

@@ -1,13 +1,27 @@
 
 body {
-  background-color: cornsilk;
+background-image: url('/assets/backg1.jpg'); 
+  background-size: cover;        /* scale to cover the whole screen */
+  background-position: center;   /* center the image */
+  background-repeat: no-repeat;  /* no tiling */
+  font-family: 'Inter', sans-serif;
   text-align: center;
-}
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  color: #fff;}
 
 .listing-img {
   width: 50vw;
 }
 
+h1 {
+      font-family: 'Uncial Antiqua', cursive;
+      font-size: 64px;         /* big text */
+      color: black;            /* black color */
+      text-align: center;      /* center horizontally */
+      margin-top: 100px;       /* move it down a bit */
+    }
 ul {
   margin: 0px;
   padding: 0px;
@@ -16,4 +30,26 @@ ul {
 li {
   list-style: none;
   text-align: center;
+}
+.vintage-button {
+  display: inline-block;
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 20px;
+  text-decoration: none;
+  color: #4b2e05;
+  background: #fdf6e3;
+  padding: 12px 30px;
+  border: 2px solid #c2a97f;
+  border-radius: 12px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px #fff8dc;
+}
+
+.vintage-button:hover {
+  background: #f4e3c1;
+  color: #2b1700;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+  transform: scale(1.05);
 }

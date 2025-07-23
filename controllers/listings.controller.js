@@ -3,11 +3,6 @@ const router = express.Router()
 const isSignedIn = require('../middleware/is-signed-in')
 const Listing = require('../models/listing')
 const upload = require('../config/multer')
-const cloudinary = require('../config/cloudinary')
-/* NEW LISTING FORM
-router.get('/new', (req, res) => {
-  res.send('The /new route is working!')
-})*/
 
 // NEW LISTING FORM
 router.get('/new', isSignedIn, (req, res) => {
@@ -15,13 +10,9 @@ router.get('/new', isSignedIn, (req, res) => {
 })
 
 // POST FORM DATA TO DATABASE
-router.post('/', isSignedIn, upload.single('image'), async (req, res) => {
+router.post('/', isSignedIn, async (req, res) => {
   try {
     req.body.seller = req.session.user._id
-    req.body.image = {
-      url: req.file.path,
-      cloudinary_id: req.file.filename
-    }
     await Listing.create(req.body)
     res.redirect('/listings')
   } catch (error) {
@@ -44,9 +35,10 @@ router.get('/', async (req, res) => {
 // VIEW A SINGLE LISTING
 router.get('/:listingId', async (req, res) => {
   try {
-    const foundListing = await Listing.findById(req.params.listingId)
+     const foundListing = await Listing.findById(req.params.listingId)
   .populate('seller')
   .populate('comments.author')
+
     res.render('listings/show.ejs', { foundListing })
   } catch (error) {
     console.log(error)
@@ -55,23 +47,15 @@ router.get('/:listingId', async (req, res) => {
 })
 
 // DELETE LISTING FROM DATABASE
-const cloudinary = require('../config/cloudinary')
-
 router.delete('/:listingId', isSignedIn, async (req, res) => {
-  try{
   const foundListing = await Listing.findById(req.params.listingId).populate('seller')
 
-  if (foundListing.seller._id.equals(req.session.user._id)) return res.send('Not authorized') 
-    if (foundListing.image?.cloudinary_id) {
-      await cloudinary.uploader.destroy(foundListing.image.cloudinary_id)
-    }
+  if (foundListing.seller._id.equals(req.session.user._id)) {
     await foundListing.deleteOne()
-    res.redirect('/listings')  
-  } //closing try 
-  catch (err) {
-    console.error(err)
-    res.send('Error deleting listing')
+    return res.redirect('/listings')
   }
+
+  return res.send('Not authorized')
 })
 
 // RENDER THE EDIT FORM VIEW
@@ -86,25 +70,14 @@ router.get('/:listingId/edit', isSignedIn, async (req, res) => {
 })
 
 // HANDLE EDIT FORM SUBMISSION
-router.put('/:listingId', isSignedIn, upload.single('image') ,async (req, res) => {
+router.put('/:listingId', isSignedIn, async (req, res) => {
   const foundListing = await Listing.findById(req.params.listingId).populate('seller')
-  // Check if the logged-in user is the listing owner
 
   if (foundListing.seller._id.equals(req.session.user._id)) {
-        // If a new image was uploaded, delete the old one from Cloudinary
-            if (req.file && foundListing.image?.cloudinary_id) {
-await cloudinary.uploader.destroy(foundListing.image.cloudinary_id)
-      foundListing.image.url = req.file.path
-      foundListing.image.cloudinary_id = req.file.filename
-    }
-   // Update listing fields
-    foundListing.title = req.body.title
-    foundListing.description = req.body.description
-    foundListing.price = req.body.price
-
-    await foundListing.save()
-        return res.redirect(`/listings/${req.params.listingId}`)
+    await Listing.findByIdAndUpdate(req.params.listingId, req.body, { new: true })
+    return res.redirect(`/listings/${req.params.listingId}`)
   }
+
   return res.send('Not authorized')
 })
 
@@ -116,6 +89,20 @@ router.post('/:listingId/comments', isSignedIn, async (req, res) => {
   await foundListing.save()
   res.redirect(`/listings/${req.params.listingId}`)
 })
+
+router.put('/:listingId/comments/:commentId', isSignedIn, async (req, res) => {
+  const foundListing = await Listing.findById(req.params.listingId)
+  const comment = foundListing.comments.id(req.params.commentId)
+
+  if (comment.author.equals(req.session.user._id)) {
+    comment.content = req.body.content
+    await foundListing.save()
+    res.redirect(`/listings/${req.params.listingId}`)
+  } else {
+    res.send('Not authorized')
+  }
+})
+
 
 
 module.exports = router
