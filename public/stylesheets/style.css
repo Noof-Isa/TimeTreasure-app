@@ -87,9 +87,9 @@ li {
   transform: scale(1.05);
 }
 
-/* ===========================
-   Layout - Full Page Split
-   =========================== */
+
+  /* Layout - Full Page Split*/
+
 .page-container {
   display: flex;
   height: 100vh;
@@ -115,29 +115,16 @@ li {
   text-align: center;
 }
 
-/* Responsive layout for mobile */
-@media (max-width: 768px) {
-  .page-container {
-    flex-direction: column;
-  }
-  .left-side,
-  .right-side {
-    flex: none;
-    width: 100%;
-    height: 50vh;
-  }
-  .right-side h1 {
-    font-size: 2rem;
-  }
-}
+
+
 
 /* ===========================
    Glassmorphism Navbar Styles
    =========================== */
 .glass-navbar {
-  background: rgba(255, 255, 255, 0.1); /* translucent white */
-  backdrop-filter: blur(10px);          /* frosted glass effect */
-  -webkit-backdrop-filter: blur(10px);  /* Safari support */
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px);          
+  -webkit-backdrop-filter: blur(10px);  
   
 }
 
