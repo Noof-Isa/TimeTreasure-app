@@ -20,7 +20,16 @@ router.post('/', isSignedIn, async (req, res) => {
     res.send('Something went wrong')
   }
 })
-
+// MY LISTINGS (ONLY SHOW LISTINGS CREATED BY CURRENT USER)
+router.get('/my', isSignedIn, async (req, res) => {
+  try {
+    const myListings = await Listing.find({ seller: req.session.user._id })
+    res.render('listings/myListing.ejs', { listings: myListings })
+  } catch (error) {
+    console.log(error)
+    res.redirect('/listings')
+  }
+})
 // VIEW ALL LISTINGS 
 router.get('/', async (req, res) => {
   try {
@@ -45,6 +54,9 @@ router.get('/:listingId', async (req, res) => {
     res.redirect('/listings')
   }
 })
+
+
+
 
 // DELETE LISTING FROM DATABASE
 router.delete('/:listingId', isSignedIn, async (req, res) => {

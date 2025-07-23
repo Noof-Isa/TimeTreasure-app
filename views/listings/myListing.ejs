@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+
+<h1>My Listings</h1>
+
+<% if (listings.length === 0) { %>
+  <p>You have no listings yet.</p>
+<% } else { %>
+  <ul>
+    <% listings.forEach(listing => { %>
+      <li>
+        <a href="/listings/<%= listing._id %>"><%= listing.title %></a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
