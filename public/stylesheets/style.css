@@ -1,27 +1,37 @@
+/* Existing styles you provided */
+img.left-full-height {
+  float: left;
+  height: 100vh;
+  width: auto;
+  object-fit: contain;
+  margin: 100;
+}
 
 body {
-background-image: url('/assets/backg1.jpg'); 
-  background-size: cover;        /* scale to cover the whole screen */
-  background-position: center;   /* center the image */
-  background-repeat: no-repeat;  /* no tiling */
+  background-color: antiquewhite;
+  background-size: cover;        
+  background-position: center;   
+  background-repeat: no-repeat;  
   font-family: 'Inter', sans-serif;
   text-align: center;
   margin: 0;
   padding: 0;
   height: 100vh;
-  color: #fff;}
+  color: #fff;
+}
 
 .listing-img {
   width: 50vw;
 }
 
 h1 {
-      font-family: 'Uncial Antiqua', cursive;
-      font-size: 64px;         /* big text */
-      color: black;            /* black color */
-      text-align: center;      /* center horizontally */
-      margin-top: 100px;       /* move it down a bit */
-    }
+  font-family: 'Uncial Antiqua', cursive;
+  font-size: 64px;
+  color: black;
+  text-align: center;
+  margin-top: 100px;
+}
+
 ul {
   margin: 0px;
   padding: 0px;
@@ -31,6 +41,7 @@ li {
   list-style: none;
   text-align: center;
 }
+
 .vintage-button {
   display: inline-block;
   font-family: 'Uncial Antiqua', cursive;
@@ -45,6 +56,7 @@ li {
   transition: all 0.3s ease;
   letter-spacing: 1px;
   text-shadow: 1px 1px #fff8dc;
+  cursor: pointer;
 }
 
 .vintage-button:hover {
@@ -52,4 +64,51 @@ li {
   color: #2b1700;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
   transform: scale(1.05);
+}
+
+/* NEW styles for full page split layout */
+.page-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.left-side {
+  flex: 1;
+  background: url('/assets/image1.png') no-repeat center center;
+  background-size: cover;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: #e8cfb2;
+  color: #000;
+  text-align: center;
+}
+
+.right-side h1 {
+  margin-top: 0;
+  font-size: 3rem;
+}
+
+/* Responsive for mobile */
+@media (max-width: 768px) {
+  .page-container {
+    flex-direction: column;
+  }
+  .left-side,
+  .right-side {
+    flex: none;
+    width: 100%;
+    height: 50vh;
+  }
+  .right-side h1 {
+    font-size: 2rem;
+  }
 }

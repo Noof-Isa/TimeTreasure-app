@@ -24,7 +24,7 @@ router.post('/', isSignedIn, async (req, res) => {
 router.get('/my', isSignedIn, async (req, res) => {
   try {
     const myListings = await Listing.find({ seller: req.session.user._id })
-    res.render('listings/myListing.ejs', { listings: myListings })
+    res.render('listings/myListings.ejs', { listings: myListings })
   } catch (error) {
     console.log(error)
     res.redirect('/listings')
