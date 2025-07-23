@@ -48,6 +48,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=EB+Garamond&display=swap" rel="stylesheet">
 
   <!--  custom stylesheet -->
   <link rel="stylesheet" href="/stylesheets/style.css" />
@@ -59,19 +60,25 @@
 
     <div class="right-side">
       <% if (user) { %>
-        <h1>Welcome to the app, <%= user.username %>!</h1>
-        <a href="/auth/sign-out" class="vintage-button">Sign out</a> 
+        <h1>Welcome to the app, <%= user.username %>!</h1>  
+              <p class="custom-font-text">
+          Thanks for joining us! Use the buttons  to manage your listings and explore more features.
+</p>
+       
+        <a href="/listings" class="vintage-button">All Listings</a> 
+        
         <a href="/listings/new" class="vintage-button">Add a Listing</a>
-        <p style="max-width: 400px; margin-top: 2rem; font-size: 1.1rem;">
-          Thanks for joining us! Use the buttons above to manage your listings and explore more features.
-        </p>
+        <a href="/auth/sign-out" class="vintage-button">Sign out</a> 
+
+
       <% } else { %>
-        <h1>Welcome to the app, guest.</h1>
+        <h1>Welcome to the TimeTreasure-app , guest.</h1>
+        <p class="custom-font-text">
+          Sign up to unlock all the features and start adding listings today!
+</p>
         <a href="/auth/sign-up" class="vintage-button">Sign up</a>
         <a href="/auth/sign-in" class="vintage-button">Sign in</a>
-        <p style="max-width: 400px; margin-top: 2rem; font-size: 1.1rem;">
-          Sign up to unlock all the features and start adding listings today!
-        </p>
+        
       <% } %>
     </div>
   </div>
